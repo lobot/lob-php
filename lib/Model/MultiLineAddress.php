@@ -1,6 +1,6 @@
 <?php
 /**
- * IntlComponents
+ * MultiLineAddress
  *
  * PHP version 7.3
  *
@@ -33,10 +33,9 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * IntlComponents Class Doc Comment
+ * MultiLineAddress Class Doc Comment
  *
  * @category Class
- * @description A nested object containing a breakdown of each component of an address.
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -44,7 +43,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
+class MultiLineAddress implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -53,7 +52,7 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'intl_components';
+    protected static $openAPIModelName = 'multi_line_address';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -61,11 +60,13 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'primary_number' => 'string',
-        'street_name' => 'string',
+        'recipient' => 'string',
+        'primary_line' => 'string',
+        'secondary_line' => 'string',
+        'urbanization' => 'string',
         'city' => 'string',
         'state' => 'string',
-        'postal_code' => 'string'
+        'zip_code' => 'string'
     ];
 
     /**
@@ -76,11 +77,13 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'primary_number' => null,
-        'street_name' => null,
+        'recipient' => null,
+        'primary_line' => null,
+        'secondary_line' => null,
+        'urbanization' => null,
         'city' => null,
         'state' => null,
-        'postal_code' => null
+        'zip_code' => null
     ];
 
     /**
@@ -110,11 +113,13 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'primary_number' => 'primary_number',
-        'street_name' => 'street_name',
+        'recipient' => 'recipient',
+        'primary_line' => 'primary_line',
+        'secondary_line' => 'secondary_line',
+        'urbanization' => 'urbanization',
         'city' => 'city',
         'state' => 'state',
-        'postal_code' => 'postal_code'
+        'zip_code' => 'zip_code'
     ];
 
     /**
@@ -123,11 +128,13 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'primary_number' => 'setPrimaryNumber',
-        'street_name' => 'setStreetName',
+        'recipient' => 'setRecipient',
+        'primary_line' => 'setPrimaryLine',
+        'secondary_line' => 'setSecondaryLine',
+        'urbanization' => 'setUrbanization',
         'city' => 'setCity',
         'state' => 'setState',
-        'postal_code' => 'setPostalCode'
+        'zip_code' => 'setZipCode'
     ];
 
     /**
@@ -136,11 +143,13 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'primary_number' => 'getPrimaryNumber',
-        'street_name' => 'getStreetName',
+        'recipient' => 'getRecipient',
+        'primary_line' => 'getPrimaryLine',
+        'secondary_line' => 'getSecondaryLine',
+        'urbanization' => 'getUrbanization',
         'city' => 'getCity',
         'state' => 'getState',
-        'postal_code' => 'getPostalCode'
+        'zip_code' => 'getZipCode'
     ];
 
     /**
@@ -200,11 +209,13 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['primary_number'] = $data['primary_number'] ?? null;
-        $this->container['street_name'] = $data['street_name'] ?? null;
+        $this->container['recipient'] = $data['recipient'] ?? null;
+        $this->container['primary_line'] = $data['primary_line'] ?? null;
+        $this->container['secondary_line'] = $data['secondary_line'] ?? null;
+        $this->container['urbanization'] = $data['urbanization'] ?? null;
         $this->container['city'] = $data['city'] ?? null;
         $this->container['state'] = $data['state'] ?? null;
-        $this->container['postal_code'] = $data['postal_code'] ?? null;
+        $this->container['zip_code'] = $data['zip_code'] ?? null;
     }
 
     /**
@@ -217,20 +228,54 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
         $invalidProperties = [];
 
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if ($this->container['recipient'] === null) {
+                $invalidProperties[] = "'recipient' can't be null";
+            }
+        }
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if ((mb_strlen($this->container['recipient']) > 500)) {
+                $invalidProperties[] = "invalid value for 'recipient', the character length must be smaller than or equal to 500.";
+            }
+
+        }
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if ($this->container['primary_line'] === null) {
+                $invalidProperties[] = "'primary_line' can't be null";
+            }
+        }
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if ((mb_strlen($this->container['primary_line']) > 500)) {
+                $invalidProperties[] = "invalid value for 'primary_line', the character length must be smaller than or equal to 500.";
+            }
+
+        }
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if (!is_null($this->container['secondary_line']) && (mb_strlen($this->container['secondary_line']) > 500)) {
+                $invalidProperties[] = "invalid value for 'secondary_line', the character length must be smaller than or equal to 500.";
+            }
+
+        }
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if (!is_null($this->container['urbanization']) && (mb_strlen($this->container['urbanization']) > 500)) {
+                $invalidProperties[] = "invalid value for 'urbanization', the character length must be smaller than or equal to 500.";
+            }
+
+        }
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
             if (!is_null($this->container['city']) && (mb_strlen($this->container['city']) > 200)) {
                 $invalidProperties[] = "invalid value for 'city', the character length must be smaller than or equal to 200.";
             }
 
         }
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($this->container['state']) && (mb_strlen($this->container['state']) > 2)) {
-                $invalidProperties[] = "invalid value for 'state', the character length must be smaller than or equal to 2.";
+            if (!is_null($this->container['state']) && (mb_strlen($this->container['state']) > 50)) {
+                $invalidProperties[] = "invalid value for 'state', the character length must be smaller than or equal to 50.";
             }
 
         }
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($this->container['postal_code']) && (mb_strlen($this->container['postal_code']) > 12)) {
-                $invalidProperties[] = "invalid value for 'postal_code', the character length must be smaller than or equal to 12.";
+            if (!is_null($this->container['zip_code']) && !preg_match("/^\\d{5}((-)?\\d{4})?$/", $this->container['zip_code'])) {
+                $invalidProperties[] = "invalid value for 'zip_code', must be conform to the pattern /^\\d{5}((-)?\\d{4})?$/.";
             }
 
         }
@@ -251,50 +296,124 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
     
 
     /**
-     * Gets primary_number
+     * Gets recipient
      *
-     * @return string|null
+     * @return string
      */
-    public function getPrimaryNumber()
+    public function getRecipient()
     {
-        return $this->container['primary_number'];
+        return $this->container['recipient'];
     }
 
     /**
-     * Sets primary_number
+     * Sets recipient
      *
-     * @param string|null $primary_number The numeric or alphanumeric part of an address preceding the street name. Often the house, building, or PO Box number.
+     * @param string $recipient The intended recipient, typically a person's or firm's name.
      *
      * @return self
      */
-    public function setPrimaryNumber($primary_number)
+    public function setRecipient($recipient)
     {
-        $this->container['primary_number'] = $primary_number;
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if ((mb_strlen($recipient) > 500)) {
+                throw new \InvalidArgumentException('invalid length for $recipient when calling MultiLineAddress., must be smaller than or equal to 500.');
+            }
+
+        }
+        $this->container['recipient'] = $recipient;
 
         return $this;
     }
 
 
     /**
-     * Gets street_name
+     * Gets primary_line
      *
-     * @return string|null
+     * @return string
      */
-    public function getStreetName()
+    public function getPrimaryLine()
     {
-        return $this->container['street_name'];
+        return $this->container['primary_line'];
     }
 
     /**
-     * Sets street_name
+     * Sets primary_line
      *
-     * @param string|null $street_name The name of the street.
+     * @param string $primary_line The primary delivery line (usually the street address) of the address. Combination of the following applicable `components`: * `primary_number` * `street_predirection` * `street_name` * `street_suffix` * `street_postdirection` * `secondary_designator` * `secondary_number` * `pmb_designator` * `pmb_number`
      *
      * @return self
      */
-    public function setStreetName($street_name)
+    public function setPrimaryLine($primary_line)
     {
-        $this->container['street_name'] = $street_name;
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if ((mb_strlen($primary_line) > 500)) {
+                throw new \InvalidArgumentException('invalid length for $primary_line when calling MultiLineAddress., must be smaller than or equal to 500.');
+            }
+
+        }
+        $this->container['primary_line'] = $primary_line;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets secondary_line
+     *
+     * @return string|null
+     */
+    public function getSecondaryLine()
+    {
+        return $this->container['secondary_line'];
+    }
+
+    /**
+     * Sets secondary_line
+     *
+     * @param string|null $secondary_line The secondary delivery line of the address. This field is typically empty but may contain information if `primary_line` is too long.
+     *
+     * @return self
+     */
+    public function setSecondaryLine($secondary_line)
+    {
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if (!is_null($secondary_line) && (mb_strlen($secondary_line) > 500)) {
+                throw new \InvalidArgumentException('invalid length for $secondary_line when calling MultiLineAddress., must be smaller than or equal to 500.');
+            }
+
+        }
+        $this->container['secondary_line'] = $secondary_line;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets urbanization
+     *
+     * @return string|null
+     */
+    public function getUrbanization()
+    {
+        return $this->container['urbanization'];
+    }
+
+    /**
+     * Sets urbanization
+     *
+     * @param string|null $urbanization Only present for addresses in Puerto Rico. An urbanization refers to an area, sector, or development within a city. See [USPS documentation](https://pe.usps.com/text/pub28/28api_008.htm#:~:text=I51.,-4%20Urbanizations&text=In%20Puerto%20Rico%2C%20identical%20street,placed%20before%20the%20urbanization%20name.) for clarification.
+     *
+     * @return self
+     */
+    public function setUrbanization($urbanization)
+    {
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if (!is_null($urbanization) && (mb_strlen($urbanization) > 500)) {
+                throw new \InvalidArgumentException('invalid length for $urbanization when calling MultiLineAddress., must be smaller than or equal to 500.');
+            }
+
+        }
+        $this->container['urbanization'] = $urbanization;
 
         return $this;
     }
@@ -321,7 +440,7 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
             if (!is_null($city) && (mb_strlen($city) > 200)) {
-                throw new \InvalidArgumentException('invalid length for $city when calling IntlComponents., must be smaller than or equal to 200.');
+                throw new \InvalidArgumentException('invalid length for $city when calling MultiLineAddress., must be smaller than or equal to 200.');
             }
 
         }
@@ -344,15 +463,15 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets state
      *
-     * @param string|null $state The [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) two letter code for the state.
+     * @param string|null $state The <a href=\"https://en.wikipedia.org/wiki/ISO_3166-2:US\" target=\"_blank\">ISO 3166-2</a> two letter code or subdivision name for the state. `city` and `state` are required if no `zip_code` is passed.
      *
      * @return self
      */
     public function setState($state)
     {
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($state) && (mb_strlen($state) > 2)) {
-                throw new \InvalidArgumentException('invalid length for $state when calling IntlComponents., must be smaller than or equal to 2.');
+            if (!is_null($state) && (mb_strlen($state) > 50)) {
+                throw new \InvalidArgumentException('invalid length for $state when calling MultiLineAddress., must be smaller than or equal to 50.');
             }
 
         }
@@ -363,31 +482,32 @@ class IntlComponents implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets postal_code
+     * Gets zip_code
      *
      * @return string|null
      */
-    public function getPostalCode()
+    public function getZipCode()
     {
-        return $this->container['postal_code'];
+        return $this->container['zip_code'];
     }
 
     /**
-     * Sets postal_code
+     * Sets zip_code
      *
-     * @param string|null $postal_code The postal code.
+     * @param string|null $zip_code Required if `city` and `state` are not passed in. If included, must be formatted as a US ZIP or ZIP+4 (e.g. `94107`, `941072282`, `94107-2282`).
      *
      * @return self
      */
-    public function setPostalCode($postal_code)
+    public function setZipCode($zip_code)
     {
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($postal_code) && (mb_strlen($postal_code) > 12)) {
-                throw new \InvalidArgumentException('invalid length for $postal_code when calling IntlComponents., must be smaller than or equal to 12.');
+
+            if (!is_null($zip_code) && (!preg_match("/^\\d{5}((-)?\\d{4})?$/", $zip_code))) {
+                throw new \InvalidArgumentException("invalid value for $zip_code when calling MultiLineAddress., must conform to the pattern /^\\d{5}((-)?\\d{4})?$/.");
             }
 
         }
-        $this->container['postal_code'] = $postal_code;
+        $this->container['zip_code'] = $zip_code;
 
         return $this;
     }

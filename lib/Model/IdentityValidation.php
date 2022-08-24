@@ -1,6 +1,6 @@
 <?php
 /**
- * IntlVerificationOrError
+ * IdentityValidation
  *
  * PHP version 7.3
  *
@@ -33,10 +33,9 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * IntlVerificationOrError Class Doc Comment
+ * IdentityValidation Class Doc Comment
  *
  * @category Class
- * @description A model used to represent an entry in a result list where the entry can either be a intl_verification or an Error. The SDK will perform necessary casting into the correct corresponding type.
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -44,7 +43,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSerializable
+class IdentityValidation implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -53,7 +52,7 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
       *
       * @var string
       */
-    protected static $openAPIModelName = 'intl_verification_or_error';
+    protected static $openAPIModelName = 'identity_validation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -65,14 +64,11 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
         'recipient' => 'string',
         'primary_line' => 'string',
         'secondary_line' => 'string',
+        'urbanization' => 'string',
         'last_line' => 'string',
-        'country' => 'string',
-        'coverage' => 'string',
-        'deliverability' => 'string',
-        'status' => 'string',
-        'components' => '\OpenAPI\Client\Model\IntlComponents',
-        'object' => 'string',
-        'error' => '\OpenAPI\Client\Model\BulkError'
+        'score' => 'float',
+        'confidence' => 'string',
+        'object' => 'string'
     ];
 
     /**
@@ -87,14 +83,11 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
         'recipient' => null,
         'primary_line' => null,
         'secondary_line' => null,
+        'urbanization' => null,
         'last_line' => null,
-        'country' => null,
-        'coverage' => null,
-        'deliverability' => null,
-        'status' => null,
-        'components' => null,
-        'object' => null,
-        'error' => null
+        'score' => 'float',
+        'confidence' => null,
+        'object' => null
     ];
 
     /**
@@ -128,14 +121,11 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
         'recipient' => 'recipient',
         'primary_line' => 'primary_line',
         'secondary_line' => 'secondary_line',
+        'urbanization' => 'urbanization',
         'last_line' => 'last_line',
-        'country' => 'country',
-        'coverage' => 'coverage',
-        'deliverability' => 'deliverability',
-        'status' => 'status',
-        'components' => 'components',
-        'object' => 'object',
-        'error' => 'error'
+        'score' => 'score',
+        'confidence' => 'confidence',
+        'object' => 'object'
     ];
 
     /**
@@ -148,14 +138,11 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
         'recipient' => 'setRecipient',
         'primary_line' => 'setPrimaryLine',
         'secondary_line' => 'setSecondaryLine',
+        'urbanization' => 'setUrbanization',
         'last_line' => 'setLastLine',
-        'country' => 'setCountry',
-        'coverage' => 'setCoverage',
-        'deliverability' => 'setDeliverability',
-        'status' => 'setStatus',
-        'components' => 'setComponents',
-        'object' => 'setObject',
-        'error' => 'setError'
+        'score' => 'setScore',
+        'confidence' => 'setConfidence',
+        'object' => 'setObject'
     ];
 
     /**
@@ -168,14 +155,11 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
         'recipient' => 'getRecipient',
         'primary_line' => 'getPrimaryLine',
         'secondary_line' => 'getSecondaryLine',
+        'urbanization' => 'getUrbanization',
         'last_line' => 'getLastLine',
-        'country' => 'getCountry',
-        'coverage' => 'getCoverage',
-        'deliverability' => 'getDeliverability',
-        'status' => 'getStatus',
-        'components' => 'getComponents',
-        'object' => 'getObject',
-        'error' => 'getError'
+        'score' => 'getScore',
+        'confidence' => 'getConfidence',
+        'object' => 'getObject'
     ];
 
     /**
@@ -219,80 +203,24 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
         return self::$openAPIModelName;
     }
 
-    const COVERAGE_SUBBUILDING = 'SUBBUILDING';
-    const COVERAGE_HOUSENUMBER_BUILDING = 'HOUSENUMBER/BUILDING';
-    const COVERAGE_STREET = 'STREET';
-    const COVERAGE_LOCALITY = 'LOCALITY';
-    const COVERAGE_SPARSE = 'SPARSE';
-    const DELIVERABILITY_DELIVERABLE = 'deliverable';
-    const DELIVERABILITY_DELIVERABLE_MISSING_INFO = 'deliverable_missing_info';
-    const DELIVERABILITY_UNDELIVERABLE = 'undeliverable';
-    const DELIVERABILITY_NO_MATCH = 'no_match';
-    const STATUS_LV4 = 'LV4';
-    const STATUS_LV3 = 'LV3';
-    const STATUS_LV2 = 'LV2';
-    const STATUS_LV1 = 'LV1';
-    const STATUS_LF4 = 'LF4';
-    const STATUS_LF3 = 'LF3';
-    const STATUS_LF2 = 'LF2';
-    const STATUS_LF1 = 'LF1';
-    const STATUS_LM4 = 'LM4';
-    const STATUS_LM3 = 'LM3';
-    const STATUS_LM2 = 'LM2';
-    const STATUS_LU1 = 'LU1';
-    const OBJECT_INTL_VERIFICATION = 'intl_verification';
+    const CONFIDENCE_HIGH = 'high';
+    const CONFIDENCE_MEDIUM = 'medium';
+    const CONFIDENCE_LOW = 'low';
+    const CONFIDENCE_EMPTY = '';
+    const OBJECT_ID_VALIDATION = 'id_validation';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getCoverageAllowableValues()
+    public function getConfidenceAllowableValues()
     {
         return [
-            self::COVERAGE_SUBBUILDING,
-            self::COVERAGE_HOUSENUMBER_BUILDING,
-            self::COVERAGE_STREET,
-            self::COVERAGE_LOCALITY,
-            self::COVERAGE_SPARSE,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getDeliverabilityAllowableValues()
-    {
-        return [
-            self::DELIVERABILITY_DELIVERABLE,
-            self::DELIVERABILITY_DELIVERABLE_MISSING_INFO,
-            self::DELIVERABILITY_UNDELIVERABLE,
-            self::DELIVERABILITY_NO_MATCH,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getStatusAllowableValues()
-    {
-        return [
-            self::STATUS_LV4,
-            self::STATUS_LV3,
-            self::STATUS_LV2,
-            self::STATUS_LV1,
-            self::STATUS_LF4,
-            self::STATUS_LF3,
-            self::STATUS_LF2,
-            self::STATUS_LF1,
-            self::STATUS_LM4,
-            self::STATUS_LM3,
-            self::STATUS_LM2,
-            self::STATUS_LU1,
+            self::CONFIDENCE_HIGH,
+            self::CONFIDENCE_MEDIUM,
+            self::CONFIDENCE_LOW,
+            self::CONFIDENCE_EMPTY,
         ];
     }
 
@@ -304,7 +232,7 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
     public function getObjectAllowableValues()
     {
         return [
-            self::OBJECT_INTL_VERIFICATION,
+            self::OBJECT_ID_VALIDATION,
         ];
     }
 
@@ -327,14 +255,11 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
         $this->container['recipient'] = $data['recipient'] ?? null;
         $this->container['primary_line'] = $data['primary_line'] ?? null;
         $this->container['secondary_line'] = $data['secondary_line'] ?? null;
+        $this->container['urbanization'] = $data['urbanization'] ?? null;
         $this->container['last_line'] = $data['last_line'] ?? null;
-        $this->container['country'] = $data['country'] ?? null;
-        $this->container['coverage'] = $data['coverage'] ?? null;
-        $this->container['deliverability'] = $data['deliverability'] ?? null;
-        $this->container['status'] = $data['status'] ?? null;
-        $this->container['components'] = $data['components'] ?? null;
+        $this->container['score'] = $data['score'] ?? null;
+        $this->container['confidence'] = $data['confidence'] ?? null;
         $this->container['object'] = $data['object'] ?? null;
-        $this->container['error'] = $data['error'] ?? null;
     }
 
     /**
@@ -347,8 +272,8 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
         $invalidProperties = [];
 
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($this->container['id']) && !preg_match("/^intl_ver_[a-zA-Z0-9]+$/", $this->container['id'])) {
-                $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^intl_ver_[a-zA-Z0-9]+$/.";
+            if (!is_null($this->container['id']) && !preg_match("/^id_validation_[a-zA-Z0-9_]+$/", $this->container['id'])) {
+                $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^id_validation_[a-zA-Z0-9_]+$/.";
             }
 
         }
@@ -359,8 +284,8 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
 
         }
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($this->container['primary_line']) && (mb_strlen($this->container['primary_line']) > 200)) {
-                $invalidProperties[] = "invalid value for 'primary_line', the character length must be smaller than or equal to 200.";
+            if (!is_null($this->container['primary_line']) && (mb_strlen($this->container['primary_line']) > 500)) {
+                $invalidProperties[] = "invalid value for 'primary_line', the character length must be smaller than or equal to 500.";
             }
 
         }
@@ -370,34 +295,28 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
             }
 
         }
-        $allowedValues = $this->getCoverageAllowableValues();
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($this->container['coverage']) && !in_array($this->container['coverage'], $allowedValues, true)) {
-                $invalidProperties[] = sprintf(
-                    "invalid value '%s' for 'coverage', must be one of '%s'",
-                    $this->container['coverage'],
-                    implode("', '", $allowedValues)
-                );
+            if (!is_null($this->container['urbanization']) && (mb_strlen($this->container['urbanization']) > 500)) {
+                $invalidProperties[] = "invalid value for 'urbanization', the character length must be smaller than or equal to 500.";
             }
-        }
 
-        $allowedValues = $this->getDeliverabilityAllowableValues();
+        }
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($this->container['deliverability']) && !in_array($this->container['deliverability'], $allowedValues, true)) {
-                $invalidProperties[] = sprintf(
-                    "invalid value '%s' for 'deliverability', must be one of '%s'",
-                    $this->container['deliverability'],
-                    implode("', '", $allowedValues)
-                );
+            if (!is_null($this->container['score']) && ($this->container['score'] > 100)) {
+                $invalidProperties[] = "invalid value for 'score', must be smaller than or equal to 100.";
             }
-        }
 
-        $allowedValues = $this->getStatusAllowableValues();
+            if (!is_null($this->container['score']) && ($this->container['score'] < 0)) {
+                $invalidProperties[] = "invalid value for 'score', must be bigger than or equal to 0.";
+            }
+
+        }
+        $allowedValues = $this->getConfidenceAllowableValues();
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            if (!is_null($this->container['confidence']) && !in_array($this->container['confidence'], $allowedValues, true)) {
                 $invalidProperties[] = sprintf(
-                    "invalid value '%s' for 'status', must be one of '%s'",
-                    $this->container['status'],
+                    "invalid value '%s' for 'confidence', must be one of '%s'",
+                    $this->container['confidence'],
                     implode("', '", $allowedValues)
                 );
             }
@@ -443,7 +362,7 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets id
      *
-     * @param string|null $id Unique identifier prefixed with `intl_ver_`.
+     * @param string|null $id Unique identifier prefixed with `id_validation_`.
      *
      * @return self
      */
@@ -451,8 +370,8 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
     {
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
 
-            if (!is_null($id) && (!preg_match("/^intl_ver_[a-zA-Z0-9]+$/", $id))) {
-                throw new \InvalidArgumentException("invalid value for $id when calling IntlVerificationOrError., must conform to the pattern /^intl_ver_[a-zA-Z0-9]+$/.");
+            if (!is_null($id) && (!preg_match("/^id_validation_[a-zA-Z0-9_]+$/", $id))) {
+                throw new \InvalidArgumentException("invalid value for $id when calling IdentityValidation., must conform to the pattern /^id_validation_[a-zA-Z0-9_]+$/.");
             }
 
         }
@@ -483,7 +402,7 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
     {
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
             if (!is_null($recipient) && (mb_strlen($recipient) > 500)) {
-                throw new \InvalidArgumentException('invalid length for $recipient when calling IntlVerificationOrError., must be smaller than or equal to 500.');
+                throw new \InvalidArgumentException('invalid length for $recipient when calling IdentityValidation., must be smaller than or equal to 500.');
             }
 
         }
@@ -506,15 +425,15 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets primary_line
      *
-     * @param string|null $primary_line primary_line
+     * @param string|null $primary_line The primary delivery line (usually the street address) of the address. Combination of the following applicable `components`: * `primary_number` * `street_predirection` * `street_name` * `street_suffix` * `street_postdirection` * `secondary_designator` * `secondary_number` * `pmb_designator` * `pmb_number`
      *
      * @return self
      */
     public function setPrimaryLine($primary_line)
     {
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($primary_line) && (mb_strlen($primary_line) > 200)) {
-                throw new \InvalidArgumentException('invalid length for $primary_line when calling IntlVerificationOrError., must be smaller than or equal to 200.');
+            if (!is_null($primary_line) && (mb_strlen($primary_line) > 500)) {
+                throw new \InvalidArgumentException('invalid length for $primary_line when calling IdentityValidation., must be smaller than or equal to 500.');
             }
 
         }
@@ -545,11 +464,42 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
     {
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
             if (!is_null($secondary_line) && (mb_strlen($secondary_line) > 500)) {
-                throw new \InvalidArgumentException('invalid length for $secondary_line when calling IntlVerificationOrError., must be smaller than or equal to 500.');
+                throw new \InvalidArgumentException('invalid length for $secondary_line when calling IdentityValidation., must be smaller than or equal to 500.');
             }
 
         }
         $this->container['secondary_line'] = $secondary_line;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets urbanization
+     *
+     * @return string|null
+     */
+    public function getUrbanization()
+    {
+        return $this->container['urbanization'];
+    }
+
+    /**
+     * Sets urbanization
+     *
+     * @param string|null $urbanization Only present for addresses in Puerto Rico. An urbanization refers to an area, sector, or development within a city. See [USPS documentation](https://pe.usps.com/text/pub28/28api_008.htm#:~:text=I51.,-4%20Urbanizations&text=In%20Puerto%20Rico%2C%20identical%20street,placed%20before%20the%20urbanization%20name.) for clarification.
+     *
+     * @return self
+     */
+    public function setUrbanization($urbanization)
+    {
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if (!is_null($urbanization) && (mb_strlen($urbanization) > 500)) {
+                throw new \InvalidArgumentException('invalid length for $urbanization when calling IdentityValidation., must be smaller than or equal to 500.');
+            }
+
+        }
+        $this->container['urbanization'] = $urbanization;
 
         return $this;
     }
@@ -568,7 +518,7 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets last_line
      *
-     * @param string|null $last_line last_line
+     * @param string|null $last_line Combination of the following applicable `components`: * City (`city`) * State (`state`) * ZIP code (`zip_code`) * ZIP+4 (`zip_code_plus_4`)
      *
      * @return self
      */
@@ -581,164 +531,73 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets country
+     * Gets score
      *
-     * @return string|null
+     * @return float|null
      */
-    public function getCountry()
+    public function getScore()
     {
-        return $this->container['country'];
+        return $this->container['score'];
     }
 
     /**
-     * Sets country
+     * Sets score
      *
-     * @param string|null $country country
+     * @param float|null $score A numerical score between 0 and 100 that represents the likelihood the provided name is associated with a physical address.
      *
      * @return self
      */
-    public function setCountry($country)
+    public function setScore($score)
     {
-        $this->container['country'] = $country;
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+
+            if (!is_null($score) && ($score > 100)) {
+                throw new \InvalidArgumentException('invalid value for $score when calling IdentityValidation., must be smaller than or equal to 100.');
+            }
+            if (!is_null($score) && ($score < 0)) {
+                throw new \InvalidArgumentException('invalid value for $score when calling IdentityValidation., must be bigger than or equal to 0.');
+            }
+
+        }
+        $this->container['score'] = $score;
 
         return $this;
     }
 
 
     /**
-     * Gets coverage
+     * Gets confidence
      *
      * @return string|null
      */
-    public function getCoverage()
+    public function getConfidence()
     {
-        return $this->container['coverage'];
+        return $this->container['confidence'];
     }
 
     /**
-     * Sets coverage
+     * Sets confidence
      *
-     * @param string|null $coverage coverage
+     * @param string|null $confidence Indicates the likelihood the recipient name and address match based on our custom internal calculation. Possible values are: - `high` — Has a Lob confidence score greater than 70. - `medium` — Has a Lob confidence score between 40 and 70. - `low` — Has a Lob confidence score less than 40. - `\"\"` — No tracking data exists for this address.
      *
      * @return self
      */
-    public function setCoverage($coverage)
+    public function setConfidence($confidence)
     {
-        $allowedValues = $this->getCoverageAllowableValues();
+        $allowedValues = $this->getConfidenceAllowableValues();
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($coverage) && !in_array($coverage, $allowedValues, true)) {
+            if (!is_null($confidence) && !in_array($confidence, $allowedValues, true)) {
                 throw new \InvalidArgumentException(
                     sprintf(
-                        "Invalid value '%s' for 'coverage', must be one of '%s'",
-                        $coverage,
+                        "Invalid value '%s' for 'confidence', must be one of '%s'",
+                        $confidence,
                         implode("', '", $allowedValues)
                     )
                 );
             }
         }
 
-        $this->container['coverage'] = $coverage;
-
-        return $this;
-    }
-
-
-    /**
-     * Gets deliverability
-     *
-     * @return string|null
-     */
-    public function getDeliverability()
-    {
-        return $this->container['deliverability'];
-    }
-
-    /**
-     * Sets deliverability
-     *
-     * @param string|null $deliverability deliverability
-     *
-     * @return self
-     */
-    public function setDeliverability($deliverability)
-    {
-        $allowedValues = $this->getDeliverabilityAllowableValues();
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($deliverability) && !in_array($deliverability, $allowedValues, true)) {
-                throw new \InvalidArgumentException(
-                    sprintf(
-                        "Invalid value '%s' for 'deliverability', must be one of '%s'",
-                        $deliverability,
-                        implode("', '", $allowedValues)
-                    )
-                );
-            }
-        }
-
-        $this->container['deliverability'] = $deliverability;
-
-        return $this;
-    }
-
-
-    /**
-     * Gets status
-     *
-     * @return string|null
-     */
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    /**
-     * Sets status
-     *
-     * @param string|null $status status
-     *
-     * @return self
-     */
-    public function setStatus($status)
-    {
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($status) && !in_array($status, $allowedValues, true)) {
-                throw new \InvalidArgumentException(
-                    sprintf(
-                        "Invalid value '%s' for 'status', must be one of '%s'",
-                        $status,
-                        implode("', '", $allowedValues)
-                    )
-                );
-            }
-        }
-
-        $this->container['status'] = $status;
-
-        return $this;
-    }
-
-
-    /**
-     * Gets components
-     *
-     * @return \OpenAPI\Client\Model\IntlComponents|null
-     */
-    public function getComponents()
-    {
-        return $this->container['components'];
-    }
-
-    /**
-     * Sets components
-     *
-     * @param \OpenAPI\Client\Model\IntlComponents|null $components components
-     *
-     * @return self
-     */
-    public function setComponents($components)
-    {
-        $this->container['components'] = $components;
+        $this->container['confidence'] = $confidence;
 
         return $this;
     }
@@ -757,7 +616,7 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets object
      *
-     * @param string|null $object object
+     * @param string|null $object Value is resource type.
      *
      * @return self
      */
@@ -777,31 +636,6 @@ class IntlVerificationOrError implements ModelInterface, ArrayAccess, \JsonSeria
         }
 
         $this->container['object'] = $object;
-
-        return $this;
-    }
-
-
-    /**
-     * Gets error
-     *
-     * @return \OpenAPI\Client\Model\BulkError|null
-     */
-    public function getError()
-    {
-        return $this->container['error'];
-    }
-
-    /**
-     * Sets error
-     *
-     * @param \OpenAPI\Client\Model\BulkError|null $error error
-     *
-     * @return self
-     */
-    public function setError($error)
-    {
-        $this->container['error'] = $error;
 
         return $this;
     }

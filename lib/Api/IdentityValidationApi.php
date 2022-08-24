@@ -1,6 +1,6 @@
 <?php
 /**
- * IntlAutocompletionsApi
+ * IdentityValidationApi
  * PHP version 7.3
  *
  * @category Class
@@ -43,14 +43,14 @@ use OpenAPI\Client\Model\LobError;
 use Jean85\PrettyVersions;
 
 /**
- * IntlAutocompletionsApi Class Doc Comment
+ * IdentityValidationApi Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class IntlAutocompletionsApi
+class IdentityValidationApi
 {
     /**
      * @var ClientInterface
@@ -150,38 +150,36 @@ class IntlAutocompletionsApi
     }
 
     /**
-     * Operation autocomplete
+     * Operation validate
      *
-     * autocomplete
+     * validate
      *
-     * @param  \OpenAPI\Client\Model\IntlAutocompletionsWritable $intl_autocompletions_writable intl_autocompletions_writable (required)
-     * @param  string $x_lang_output * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. (optional)
+     * @param  \OpenAPI\Client\Model\MultiLineAddress $multi_line_address multi_line_address (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\IntlAutocompletions|\OpenAPI\Client\Model\LobError
+     * @return \OpenAPI\Client\Model\IdentityValidation|\OpenAPI\Client\Model\LobError
      */
-    public function autocomplete($intl_autocompletions_writable, $x_lang_output = null)
+    public function validate($multi_line_address)
     {
-        $response = $this->autocompleteWithHttpInfo($intl_autocompletions_writable, $x_lang_output);
+        $response = $this->validateWithHttpInfo($multi_line_address);
         return $response;
     }
 
     /**
-     * Operation autocompleteWithHttpInfo
+     * Operation validateWithHttpInfo
      *
-     * autocomplete
+     * validate
      *
-     * @param  \OpenAPI\Client\Model\IntlAutocompletionsWritable $intl_autocompletions_writable (required)
-     * @param  string $x_lang_output * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. (optional)
+     * @param  \OpenAPI\Client\Model\MultiLineAddress $multi_line_address (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\IntlAutocompletions|\OpenAPI\Client\Model\LobError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\IdentityValidation|\OpenAPI\Client\Model\LobError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function autocompleteWithHttpInfo($intl_autocompletions_writable, $x_lang_output = null)
+    public function validateWithHttpInfo($multi_line_address)
     {
-        $request = $this->autocompleteRequest($intl_autocompletions_writable, $x_lang_output);
+        $request = $this->validateRequest($multi_line_address);
 
         try {
             $options = $this->createHttpClientOption();
@@ -223,7 +221,7 @@ class IntlAutocompletionsApi
             
             // Since all non successes are thrown above, we can assume success
             $content = (string) $response->getBody();
-            return ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\IntlAutocompletions', []);
+            return ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\IdentityValidation', []);
             
         } catch (ApiException $e) {
             throw $e;
@@ -231,34 +229,29 @@ class IntlAutocompletionsApi
     }
 
     /**
-     * Create request for operation 'autocomplete'
+     * Create request for operation 'validate'
      *
-     * @param  \OpenAPI\Client\Model\IntlAutocompletionsWritable $intl_autocompletions_writable (required)
-     * @param  string $x_lang_output * &#x60;native&#x60; - Translate response to the native language of the country in the request * &#x60;match&#x60; - match the response to the language in the request  Default response is in English. (optional)
+     * @param  \OpenAPI\Client\Model\MultiLineAddress $multi_line_address (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function autocompleteRequest($intl_autocompletions_writable, $x_lang_output = null)
+    public function validateRequest($multi_line_address)
     {
-        // verify the required parameter 'intl_autocompletions_writable' is set
-        if ($intl_autocompletions_writable === null || (is_array($intl_autocompletions_writable) && count($intl_autocompletions_writable) === 0)) {
+        // verify the required parameter 'multi_line_address' is set
+        if ($multi_line_address === null || (is_array($multi_line_address) && count($multi_line_address) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $intl_autocompletions_writable when calling autocomplete'
+                'Missing the required parameter $multi_line_address when calling validate'
             );
         }
 
-        $resourcePath = '/intl_autocompletions';
+        $resourcePath = '/identity_validation';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
 
 
-        // header params
-        if ($x_lang_output !== null) {
-            $headerParams['x-lang-output'] = ObjectSerializer::toHeaderValue($x_lang_output);
-        }
 
 
 
@@ -268,8 +261,8 @@ class IntlAutocompletionsApi
         );
 
         // for model (json/xml)
-        if (isset($intl_autocompletions_writable)) {
-            $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($intl_autocompletions_writable));
+        if (isset($multi_line_address)) {
+            $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($multi_line_address));
         }
 
         $defaultHeaders = [];
