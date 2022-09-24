@@ -1,6 +1,6 @@
 <?php
 /**
- * CheckBottom
+ * InlineResponse200
  *
  * PHP version 7.3
  *
@@ -33,10 +33,10 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * CheckBottom Class Doc Comment
+ * InlineResponse200 Class Doc Comment
  *
  * @category Class
- * @description The artwork to use on the bottom of the check page.  Notes: - HTML merge variables should not include delimiting whitespace. - PDF, PNG, and JPGs must be sized at 8.5\&quot;x11\&quot; at 300 DPI, while supplied HTML will be rendered and trimmed to fit on a 8.5\&quot;x11\&quot; page. - The check bottom will always be printed in black &amp; white. - Must conform to [this template](https://s3-us-west-2.amazonaws.com/public.lob.com/assets/templates/check_bottom_template.pdf).  Need more help? Consult our [HTML examples](#section/HTML-Examples).
+ * @description Lob uses RESTful HTTP response codes to indicate success or failure of an API request. In general, 2xx indicates success, 4xx indicate an input error, and 5xx indicates an error on Lob&#39;s end.
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -44,7 +44,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
+class InlineResponse200 implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -53,7 +53,7 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'check_bottom';
+    protected static $openAPIModelName = 'inline_response_200';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -61,7 +61,8 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        
+        'id' => 'string',
+        'deleted' => 'bool'
     ];
 
     /**
@@ -72,7 +73,8 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        
+        'id' => null,
+        'deleted' => null
     ];
 
     /**
@@ -102,7 +104,8 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        
+        'id' => 'id',
+        'deleted' => 'deleted'
     ];
 
     /**
@@ -111,7 +114,8 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        
+        'id' => 'setId',
+        'deleted' => 'setDeleted'
     ];
 
     /**
@@ -120,7 +124,8 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        
+        'id' => 'getId',
+        'deleted' => 'getDeleted'
     ];
 
     /**
@@ -180,6 +185,8 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
+        $this->container['id'] = $data['id'] ?? null;
+        $this->container['deleted'] = $data['deleted'] ?? null;
     }
 
     /**
@@ -191,6 +198,12 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if (!is_null($this->container['id']) && !preg_match("/^cmp_[a-zA-Z0-9]+$/", $this->container['id'])) {
+                $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^cmp_[a-zA-Z0-9]+$/.";
+            }
+
+        }
         return $invalidProperties;
     }
 
@@ -205,6 +218,63 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
+
+    /**
+     * Gets id
+     *
+     * @return string|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param string|null $id Unique identifier prefixed with `cmp_`.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+
+            if (!is_null($id) && (!preg_match("/^cmp_[a-zA-Z0-9]+$/", $id))) {
+                throw new \InvalidArgumentException("invalid value for $id when calling InlineResponse200., must conform to the pattern /^cmp_[a-zA-Z0-9]+$/.");
+            }
+
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets deleted
+     *
+     * @return bool|null
+     */
+    public function getDeleted()
+    {
+        return $this->container['deleted'];
+    }
+
+    /**
+     * Sets deleted
+     *
+     * @param bool|null $deleted True if the resource has been successfully deleted.
+     *
+     * @return self
+     */
+    public function setDeleted($deleted)
+    {
+        $this->container['deleted'] = $deleted;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -212,6 +282,7 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -224,6 +295,7 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -237,6 +309,7 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -250,9 +323,8 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
      * Unsets offset.
      *
      * @param integer $offset Offset
-     *
-     * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
@@ -265,6 +337,7 @@ class CheckBottom implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

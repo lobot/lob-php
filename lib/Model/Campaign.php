@@ -1,6 +1,6 @@
 <?php
 /**
- * BankAccount
+ * Campaign
  *
  * PHP version 7.3
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * BankAccount Class Doc Comment
+ * Campaign Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -43,7 +43,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
+class Campaign implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'bank_account';
+    protected static $openAPIModelName = 'campaign';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,16 +60,20 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'billing_group_id' => 'string',
+        'name' => 'string',
         'description' => 'string',
-        'routing_number' => 'string',
-        'account_number' => 'string',
-        'account_type' => 'string',
-        'signatory' => 'string',
+        'schedule_type' => '\OpenAPI\Client\Model\CmpScheduleType',
+        'target_delivery_date' => '\DateTime',
+        'send_date' => '\DateTime',
+        'cancel_window_campaign_minutes' => 'int',
         'metadata' => 'array<string,string>',
+        'use_type' => '\OpenAPI\Client\Model\CmpUseType',
+        'auto_cancel_if_ncoa' => 'bool',
         'id' => 'string',
-        'signature_url' => 'string',
-        'bank_name' => 'string',
-        'verified' => 'bool',
+        'account_id' => 'string',
+        'is_draft' => 'bool',
+        'creatives' => '\OpenAPI\Client\Model\CampaignCreative[]',
         'date_created' => '\DateTime',
         'date_modified' => '\DateTime',
         'deleted' => 'bool',
@@ -84,16 +88,20 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'billing_group_id' => null,
+        'name' => null,
         'description' => null,
-        'routing_number' => null,
-        'account_number' => null,
-        'account_type' => null,
-        'signatory' => null,
+        'schedule_type' => null,
+        'target_delivery_date' => 'date-time',
+        'send_date' => 'date-time',
+        'cancel_window_campaign_minutes' => null,
         'metadata' => null,
+        'use_type' => null,
+        'auto_cancel_if_ncoa' => null,
         'id' => null,
-        'signature_url' => null,
-        'bank_name' => null,
-        'verified' => null,
+        'account_id' => null,
+        'is_draft' => null,
+        'creatives' => null,
         'date_created' => 'date-time',
         'date_modified' => 'date-time',
         'deleted' => null,
@@ -127,16 +135,20 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'billing_group_id' => 'billing_group_id',
+        'name' => 'name',
         'description' => 'description',
-        'routing_number' => 'routing_number',
-        'account_number' => 'account_number',
-        'account_type' => 'account_type',
-        'signatory' => 'signatory',
+        'schedule_type' => 'schedule_type',
+        'target_delivery_date' => 'target_delivery_date',
+        'send_date' => 'send_date',
+        'cancel_window_campaign_minutes' => 'cancel_window_campaign_minutes',
         'metadata' => 'metadata',
+        'use_type' => 'use_type',
+        'auto_cancel_if_ncoa' => 'auto_cancel_if_ncoa',
         'id' => 'id',
-        'signature_url' => 'signature_url',
-        'bank_name' => 'bank_name',
-        'verified' => 'verified',
+        'account_id' => 'account_id',
+        'is_draft' => 'is_draft',
+        'creatives' => 'creatives',
         'date_created' => 'date_created',
         'date_modified' => 'date_modified',
         'deleted' => 'deleted',
@@ -149,16 +161,20 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'billing_group_id' => 'setBillingGroupId',
+        'name' => 'setName',
         'description' => 'setDescription',
-        'routing_number' => 'setRoutingNumber',
-        'account_number' => 'setAccountNumber',
-        'account_type' => 'setAccountType',
-        'signatory' => 'setSignatory',
+        'schedule_type' => 'setScheduleType',
+        'target_delivery_date' => 'setTargetDeliveryDate',
+        'send_date' => 'setSendDate',
+        'cancel_window_campaign_minutes' => 'setCancelWindowCampaignMinutes',
         'metadata' => 'setMetadata',
+        'use_type' => 'setUseType',
+        'auto_cancel_if_ncoa' => 'setAutoCancelIfNcoa',
         'id' => 'setId',
-        'signature_url' => 'setSignatureUrl',
-        'bank_name' => 'setBankName',
-        'verified' => 'setVerified',
+        'account_id' => 'setAccountId',
+        'is_draft' => 'setIsDraft',
+        'creatives' => 'setCreatives',
         'date_created' => 'setDateCreated',
         'date_modified' => 'setDateModified',
         'deleted' => 'setDeleted',
@@ -171,16 +187,20 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'billing_group_id' => 'getBillingGroupId',
+        'name' => 'getName',
         'description' => 'getDescription',
-        'routing_number' => 'getRoutingNumber',
-        'account_number' => 'getAccountNumber',
-        'account_type' => 'getAccountType',
-        'signatory' => 'getSignatory',
+        'schedule_type' => 'getScheduleType',
+        'target_delivery_date' => 'getTargetDeliveryDate',
+        'send_date' => 'getSendDate',
+        'cancel_window_campaign_minutes' => 'getCancelWindowCampaignMinutes',
         'metadata' => 'getMetadata',
+        'use_type' => 'getUseType',
+        'auto_cancel_if_ncoa' => 'getAutoCancelIfNcoa',
         'id' => 'getId',
-        'signature_url' => 'getSignatureUrl',
-        'bank_name' => 'getBankName',
-        'verified' => 'getVerified',
+        'account_id' => 'getAccountId',
+        'is_draft' => 'getIsDraft',
+        'creatives' => 'getCreatives',
         'date_created' => 'getDateCreated',
         'date_modified' => 'getDateModified',
         'deleted' => 'getDeleted',
@@ -228,22 +248,7 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    const ACCOUNT_TYPE_COMPANY = 'company';
-    const ACCOUNT_TYPE_INDIVIDUAL = 'individual';
-    const OBJECT_BANK_ACCOUNT = 'bank_account';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getAccountTypeAllowableValues()
-    {
-        return [
-            self::ACCOUNT_TYPE_COMPANY,
-            self::ACCOUNT_TYPE_INDIVIDUAL,
-        ];
-    }
+    const OBJECT_CAMPAIGN = 'campaign';
 
     /**
      * Gets allowable values of the enum
@@ -253,7 +258,7 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     public function getObjectAllowableValues()
     {
         return [
-            self::OBJECT_BANK_ACCOUNT,
+            self::OBJECT_CAMPAIGN,
         ];
     }
 
@@ -272,16 +277,20 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
+        $this->container['billing_group_id'] = $data['billing_group_id'] ?? null;
+        $this->container['name'] = $data['name'] ?? null;
         $this->container['description'] = $data['description'] ?? null;
-        $this->container['routing_number'] = $data['routing_number'] ?? null;
-        $this->container['account_number'] = $data['account_number'] ?? null;
-        $this->container['account_type'] = $data['account_type'] ?? null;
-        $this->container['signatory'] = $data['signatory'] ?? null;
+        $this->container['schedule_type'] = $data['schedule_type'] ?? null;
+        $this->container['target_delivery_date'] = $data['target_delivery_date'] ?? null;
+        $this->container['send_date'] = $data['send_date'] ?? null;
+        $this->container['cancel_window_campaign_minutes'] = $data['cancel_window_campaign_minutes'] ?? null;
         $this->container['metadata'] = $data['metadata'] ?? null;
+        $this->container['use_type'] = $data['use_type'] ?? null;
+        $this->container['auto_cancel_if_ncoa'] = $data['auto_cancel_if_ncoa'] ?? null;
         $this->container['id'] = $data['id'] ?? null;
-        $this->container['signature_url'] = $data['signature_url'] ?? null;
-        $this->container['bank_name'] = $data['bank_name'] ?? null;
-        $this->container['verified'] = $data['verified'] ?? null;
+        $this->container['account_id'] = $data['account_id'] ?? null;
+        $this->container['is_draft'] = $data['is_draft'] ?? null;
+        $this->container['creatives'] = $data['creatives'] ?? null;
         $this->container['date_created'] = $data['date_created'] ?? null;
         $this->container['date_modified'] = $data['date_modified'] ?? null;
         $this->container['deleted'] = $data['deleted'] ?? null;
@@ -298,65 +307,33 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
         $invalidProperties = [];
 
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if (!is_null($this->container['billing_group_id']) && !preg_match("/^bg_[a-zA-Z0-9]+$/", $this->container['billing_group_id'])) {
+                $invalidProperties[] = "invalid value for 'billing_group_id', must be conform to the pattern /^bg_[a-zA-Z0-9]+$/.";
+            }
+
+        }
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if ($this->container['name'] === null) {
+                $invalidProperties[] = "'name' can't be null";
+            }
+        }
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
             if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 255)) {
                 $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 255.";
             }
 
         }
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if ($this->container['routing_number'] === null) {
-                $invalidProperties[] = "'routing_number' can't be null";
+            if ($this->container['schedule_type'] === null) {
+                $invalidProperties[] = "'schedule_type' can't be null";
             }
         }
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if ((mb_strlen($this->container['routing_number']) > 9)) {
-                $invalidProperties[] = "invalid value for 'routing_number', the character length must be smaller than or equal to 9.";
-            }
-
-            if ((mb_strlen($this->container['routing_number']) < 9)) {
-                $invalidProperties[] = "invalid value for 'routing_number', the character length must be bigger than or equal to 9.";
-            }
-
         }
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if ($this->container['account_number'] === null) {
-                $invalidProperties[] = "'account_number' can't be null";
+            if ($this->container['auto_cancel_if_ncoa'] === null) {
+                $invalidProperties[] = "'auto_cancel_if_ncoa' can't be null";
             }
-        }
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if ((mb_strlen($this->container['account_number']) > 17)) {
-                $invalidProperties[] = "invalid value for 'account_number', the character length must be smaller than or equal to 17.";
-            }
-
-        }
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if ($this->container['account_type'] === null) {
-                $invalidProperties[] = "'account_type' can't be null";
-            }
-        }
-        $allowedValues = $this->getAccountTypeAllowableValues();
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($this->container['account_type']) && !in_array($this->container['account_type'], $allowedValues, true)) {
-                $invalidProperties[] = sprintf(
-                    "invalid value '%s' for 'account_type', must be one of '%s'",
-                    $this->container['account_type'],
-                    implode("', '", $allowedValues)
-                );
-            }
-        }
-
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if ($this->container['signatory'] === null) {
-                $invalidProperties[] = "'signatory' can't be null";
-            }
-        }
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if ((mb_strlen($this->container['signatory']) > 30)) {
-                $invalidProperties[] = "invalid value for 'signatory', the character length must be smaller than or equal to 30.";
-            }
-
-        }
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
         }
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
             if ($this->container['id'] === null) {
@@ -364,16 +341,20 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!preg_match("/^bank_[a-zA-Z0-9]+$/", $this->container['id'])) {
-                $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^bank_[a-zA-Z0-9]+$/.";
+            if (!preg_match("/^cmp_[a-zA-Z0-9]+$/", $this->container['id'])) {
+                $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^cmp_[a-zA-Z0-9]+$/.";
             }
 
         }
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!is_null($this->container['signature_url']) && !preg_match("/^https:\/\/lob-assets\\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\\.pdf|_thumb_[a-z]+_[0-9]+\\.png)\\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/", $this->container['signature_url'])) {
-                $invalidProperties[] = "invalid value for 'signature_url', must be conform to the pattern /^https:\/\/lob-assets\\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\\.pdf|_thumb_[a-z]+_[0-9]+\\.png)\\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/.";
+            if ($this->container['is_draft'] === null) {
+                $invalidProperties[] = "'is_draft' can't be null";
             }
-
+        }
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if ($this->container['creatives'] === null) {
+                $invalidProperties[] = "'creatives' can't be null";
+            }
         }
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
             if ($this->container['date_created'] === null) {
@@ -418,6 +399,63 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     
 
     /**
+     * Gets billing_group_id
+     *
+     * @return string|null
+     */
+    public function getBillingGroupId()
+    {
+        return $this->container['billing_group_id'];
+    }
+
+    /**
+     * Sets billing_group_id
+     *
+     * @param string|null $billing_group_id Unique identifier prefixed with `bg_`.
+     *
+     * @return self
+     */
+    public function setBillingGroupId($billing_group_id)
+    {
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+
+            if (!is_null($billing_group_id) && (!preg_match("/^bg_[a-zA-Z0-9]+$/", $billing_group_id))) {
+                throw new \InvalidArgumentException("invalid value for $billing_group_id when calling Campaign., must conform to the pattern /^bg_[a-zA-Z0-9]+$/.");
+            }
+
+        }
+        $this->container['billing_group_id'] = $billing_group_id;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name Name of the campaign.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+
+    /**
      * Gets description
      *
      * @return string|null
@@ -438,7 +476,7 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
             if (!is_null($description) && (mb_strlen($description) > 255)) {
-                throw new \InvalidArgumentException('invalid length for $description when calling BankAccount., must be smaller than or equal to 255.');
+                throw new \InvalidArgumentException('invalid length for $description when calling Campaign., must be smaller than or equal to 255.');
             }
 
         }
@@ -449,134 +487,100 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets routing_number
+     * Gets schedule_type
      *
-     * @return string
+     * @return \OpenAPI\Client\Model\CmpScheduleType
      */
-    public function getRoutingNumber()
+    public function getScheduleType()
     {
-        return $this->container['routing_number'];
+        return $this->container['schedule_type'];
     }
 
     /**
-     * Sets routing_number
+     * Sets schedule_type
      *
-     * @param string $routing_number Must be a [valid US routing number](https://www.frbservices.org/index.html).
+     * @param \OpenAPI\Client\Model\CmpScheduleType $schedule_type schedule_type
      *
      * @return self
      */
-    public function setRoutingNumber($routing_number)
+    public function setScheduleType($schedule_type)
     {
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if ((mb_strlen($routing_number) > 9)) {
-                throw new \InvalidArgumentException('invalid length for $routing_number when calling BankAccount., must be smaller than or equal to 9.');
-            }
-            if ((mb_strlen($routing_number) < 9)) {
-                throw new \InvalidArgumentException('invalid length for $routing_number when calling BankAccount., must be bigger than or equal to 9.');
-            }
-
-        }
-        $this->container['routing_number'] = $routing_number;
+        $this->container['schedule_type'] = $schedule_type;
 
         return $this;
     }
 
 
     /**
-     * Gets account_number
+     * Gets target_delivery_date
      *
-     * @return string
+     * @return \DateTime|null
      */
-    public function getAccountNumber()
+    public function getTargetDeliveryDate()
     {
-        return $this->container['account_number'];
+        return $this->container['target_delivery_date'];
     }
 
     /**
-     * Sets account_number
+     * Sets target_delivery_date
      *
-     * @param string $account_number account_number
+     * @param \DateTime|null $target_delivery_date If `schedule_type` is `target_delivery_date`, provide a targeted delivery date for mail pieces in this campaign.
      *
      * @return self
      */
-    public function setAccountNumber($account_number)
+    public function setTargetDeliveryDate($target_delivery_date)
     {
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if ((mb_strlen($account_number) > 17)) {
-                throw new \InvalidArgumentException('invalid length for $account_number when calling BankAccount., must be smaller than or equal to 17.');
-            }
-
-        }
-        $this->container['account_number'] = $account_number;
+        $this->container['target_delivery_date'] = $target_delivery_date;
 
         return $this;
     }
 
 
     /**
-     * Gets account_type
+     * Gets send_date
      *
-     * @return string
+     * @return \DateTime|null
      */
-    public function getAccountType()
+    public function getSendDate()
     {
-        return $this->container['account_type'];
+        return $this->container['send_date'];
     }
 
     /**
-     * Sets account_type
+     * Sets send_date
      *
-     * @param string $account_type The type of entity that holds the account.
+     * @param \DateTime|null $send_date If `schedule_type` is `scheduled_send_date`, provide a date to send this campaign.
      *
      * @return self
      */
-    public function setAccountType($account_type)
+    public function setSendDate($send_date)
     {
-        $allowedValues = $this->getAccountTypeAllowableValues();
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if (!in_array($account_type, $allowedValues, true)) {
-                throw new \InvalidArgumentException(
-                    sprintf(
-                        "Invalid value '%s' for 'account_type', must be one of '%s'",
-                        $account_type,
-                        implode("', '", $allowedValues)
-                    )
-                );
-            }
-        }
-
-        $this->container['account_type'] = $account_type;
+        $this->container['send_date'] = $send_date;
 
         return $this;
     }
 
 
     /**
-     * Gets signatory
+     * Gets cancel_window_campaign_minutes
      *
-     * @return string
+     * @return int|null
      */
-    public function getSignatory()
+    public function getCancelWindowCampaignMinutes()
     {
-        return $this->container['signatory'];
+        return $this->container['cancel_window_campaign_minutes'];
     }
 
     /**
-     * Sets signatory
+     * Sets cancel_window_campaign_minutes
      *
-     * @param string $signatory The signatory associated with your account. This name will be printed on checks created with this bank account. If you prefer to use a custom signature image on your checks instead, please create your bank account from the [Dashboard](https://dashboard.lob.com/#/login).
+     * @param int|null $cancel_window_campaign_minutes A window, in minutes, within which the campaign can be canceled.
      *
      * @return self
      */
-    public function setSignatory($signatory)
+    public function setCancelWindowCampaignMinutes($cancel_window_campaign_minutes)
     {
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
-            if ((mb_strlen($signatory) > 30)) {
-                throw new \InvalidArgumentException('invalid length for $signatory when calling BankAccount., must be smaller than or equal to 30.');
-            }
-
-        }
-        $this->container['signatory'] = $signatory;
+        $this->container['cancel_window_campaign_minutes'] = $cancel_window_campaign_minutes;
 
         return $this;
     }
@@ -612,6 +616,56 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
+     * Gets use_type
+     *
+     * @return \OpenAPI\Client\Model\CmpUseType|null
+     */
+    public function getUseType()
+    {
+        return $this->container['use_type'];
+    }
+
+    /**
+     * Sets use_type
+     *
+     * @param \OpenAPI\Client\Model\CmpUseType|null $use_type use_type
+     *
+     * @return self
+     */
+    public function setUseType($use_type)
+    {
+        $this->container['use_type'] = $use_type;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets auto_cancel_if_ncoa
+     *
+     * @return bool
+     */
+    public function getAutoCancelIfNcoa()
+    {
+        return $this->container['auto_cancel_if_ncoa'];
+    }
+
+    /**
+     * Sets auto_cancel_if_ncoa
+     *
+     * @param bool $auto_cancel_if_ncoa Whether or not a mail piece should be automatically canceled and not sent if the address is updated via NCOA.
+     *
+     * @return self
+     */
+    public function setAutoCancelIfNcoa($auto_cancel_if_ncoa)
+    {
+        $this->container['auto_cancel_if_ncoa'] = $auto_cancel_if_ncoa;
+
+        return $this;
+    }
+
+
+    /**
      * Gets id
      *
      * @return string
@@ -624,7 +678,7 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string $id Unique identifier prefixed with `bank_`.
+     * @param string $id Unique identifier prefixed with `cmp_`.
      *
      * @return self
      */
@@ -632,8 +686,8 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
 
-            if ((!preg_match("/^bank_[a-zA-Z0-9]+$/", $id))) {
-                throw new \InvalidArgumentException("invalid value for $id when calling BankAccount., must conform to the pattern /^bank_[a-zA-Z0-9]+$/.");
+            if ((!preg_match("/^cmp_[a-zA-Z0-9]+$/", $id))) {
+                throw new \InvalidArgumentException("invalid value for $id when calling Campaign., must conform to the pattern /^cmp_[a-zA-Z0-9]+$/.");
             }
 
         }
@@ -644,82 +698,82 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets signature_url
+     * Gets account_id
      *
      * @return string|null
      */
-    public function getSignatureUrl()
+    public function getAccountId()
     {
-        return $this->container['signature_url'];
+        return $this->container['account_id'];
     }
 
     /**
-     * Sets signature_url
+     * Sets account_id
      *
-     * @param string|null $signature_url A signed link to the signature image. will be generated.
+     * @param string|null $account_id Account ID that this campaign is associated with.
      *
      * @return self
      */
-    public function setSignatureUrl($signature_url)
+    public function setAccountId($account_id)
     {
-        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+        $this->container['account_id'] = $account_id;
 
-            if (!is_null($signature_url) && (!preg_match("/^https:\/\/lob-assets\\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\\.pdf|_thumb_[a-z]+_[0-9]+\\.png)\\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/", $signature_url))) {
-                throw new \InvalidArgumentException("invalid value for $signature_url when calling BankAccount., must conform to the pattern /^https:\/\/lob-assets\\.com\/(letters|postcards|bank-accounts|checks|self-mailers|cards)\/[a-z]{3,4}_[a-z0-9]{15,16}(\\.pdf|_thumb_[a-z]+_[0-9]+\\.png)\\?(version=[a-z0-9-]*&)?expires=[0-9]{10}&signature=[a-zA-Z0-9-_]+$/.");
+        return $this;
+    }
+
+
+    /**
+     * Gets is_draft
+     *
+     * @return bool
+     */
+    public function getIsDraft()
+    {
+        return $this->container['is_draft'];
+    }
+
+    /**
+     * Sets is_draft
+     *
+     * @param bool $is_draft Whether or not the campaign is still a draft.
+     *
+     * @return self
+     */
+    public function setIsDraft($is_draft)
+    {
+        $this->container['is_draft'] = $is_draft;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets creatives
+     *
+     * @return \OpenAPI\Client\Model\CampaignCreative[]
+     */
+    public function getCreatives()
+    {
+        return $this->container['creatives'];
+    }
+
+    /**
+     * Sets creatives
+     *
+     * @param \OpenAPI\Client\Model\CampaignCreative[] $creatives An array of creatives that have been associated with this campaign.
+     *
+     * @return self
+     */
+    public function setCreatives($creatives)
+    {
+        $this->container['creatives'] = [];
+        if ($creatives) {
+            foreach ($creatives as $point) {
+                $deserializedData = ObjectSerializer::deserialize($point, '\OpenAPI\Client\Model\CampaignCreative', []);
+                
+                array_push($this->container['creatives'], $deserializedData);
             }
-
         }
-        $this->container['signature_url'] = $signature_url;
-
-        return $this;
-    }
-
-
-    /**
-     * Gets bank_name
-     *
-     * @return string|null
-     */
-    public function getBankName()
-    {
-        return $this->container['bank_name'];
-    }
-
-    /**
-     * Sets bank_name
-     *
-     * @param string|null $bank_name The name of the bank based on the provided routing number, e.g. `JPMORGAN CHASE BANK`.
-     *
-     * @return self
-     */
-    public function setBankName($bank_name)
-    {
-        $this->container['bank_name'] = $bank_name;
-
-        return $this;
-    }
-
-
-    /**
-     * Gets verified
-     *
-     * @return bool|null
-     */
-    public function getVerified()
-    {
-        return $this->container['verified'];
-    }
-
-    /**
-     * Sets verified
-     *
-     * @param bool|null $verified A bank account must be verified before a check can be created.
-     *
-     * @return self
-     */
-    public function setVerified($verified)
-    {
-        $this->container['verified'] = $verified;
 
         return $this;
     }
@@ -813,7 +867,7 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets object
      *
-     * @param string $object object
+     * @param string $object Value is resource type.
      *
      * @return self
      */

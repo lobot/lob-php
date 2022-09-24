@@ -1,6 +1,6 @@
 <?php
 /**
- * SingleLineAddress
+ * PostcardDetailsWritable
  *
  * PHP version 7.3
  *
@@ -33,9 +33,10 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * SingleLineAddress Class Doc Comment
+ * PostcardDetailsWritable Class Doc Comment
  *
  * @category Class
+ * @description Properties that the postcards in your Creative should have.
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,7 +44,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializable
+class PostcardDetailsWritable implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +53,7 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'single_line_address';
+    protected static $openAPIModelName = 'postcard_details_writable';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,7 +61,8 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'address' => 'string'
+        'mail_type' => '\OpenAPI\Client\Model\MailType',
+        'size' => '\OpenAPI\Client\Model\PostcardSize'
     ];
 
     /**
@@ -71,7 +73,8 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'address' => null
+        'mail_type' => null,
+        'size' => null
     ];
 
     /**
@@ -101,7 +104,8 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'address' => 'address'
+        'mail_type' => 'mail_type',
+        'size' => 'size'
     ];
 
     /**
@@ -110,7 +114,8 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'address' => 'setAddress'
+        'mail_type' => 'setMailType',
+        'size' => 'setSize'
     ];
 
     /**
@@ -119,7 +124,8 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'address' => 'getAddress'
+        'mail_type' => 'getMailType',
+        'size' => 'getSize'
     ];
 
     /**
@@ -179,7 +185,8 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->container['address'] = $data['address'] ?? null;
+        $this->container['mail_type'] = $data['mail_type'] ?? null;
+        $this->container['size'] = $data['size'] ?? null;
     }
 
     /**
@@ -190,10 +197,6 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!is_null($this->container['address']) && (mb_strlen($this->container['address']) > 500)) {
-            $invalidProperties[] = "invalid value for 'address', the character length must be smaller than or equal to 500.";
-        }
 
         return $invalidProperties;
     }
@@ -209,31 +212,53 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
 
     /**
-     * Gets address
+     * Gets mail_type
      *
-     * @return string|null
+     * @return \OpenAPI\Client\Model\MailType|null
      */
-    public function getAddress()
+    public function getMailType()
     {
-        return $this->container['address'];
+        return $this->container['mail_type'];
     }
 
     /**
-     * Sets address
+     * Sets mail_type
      *
-     * @param string|null $address The entire address in one string (e.g., \"210 King Street 94107\"). _Does not support a recipient and will error when other payload parameters are provided._
+     * @param \OpenAPI\Client\Model\MailType|null $mail_type mail_type
      *
      * @return self
      */
-    public function setAddress($address)
+    public function setMailType($mail_type)
     {
-        if (!is_null($address) && (mb_strlen($address) > 500)) {
-            throw new \InvalidArgumentException('invalid length for $address when calling SingleLineAddress., must be smaller than or equal to 500.');
-        }
+        $this->container['mail_type'] = $mail_type;
 
-        $this->container['address'] = $address;
+        return $this;
+    }
+
+
+    /**
+     * Gets size
+     *
+     * @return \OpenAPI\Client\Model\PostcardSize|null
+     */
+    public function getSize()
+    {
+        return $this->container['size'];
+    }
+
+    /**
+     * Sets size
+     *
+     * @param \OpenAPI\Client\Model\PostcardSize|null $size size
+     *
+     * @return self
+     */
+    public function setSize($size)
+    {
+        $this->container['size'] = $size;
 
         return $this;
     }
@@ -244,6 +269,7 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -256,6 +282,7 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -269,6 +296,7 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -282,9 +310,8 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
      * Unsets offset.
      *
      * @param integer $offset Offset
-     *
-     * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
@@ -297,6 +324,7 @@ class SingleLineAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

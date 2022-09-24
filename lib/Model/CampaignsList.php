@@ -1,6 +1,6 @@
 <?php
 /**
- * SingleLineAddressIntl
+ * CampaignsList
  *
  * PHP version 7.3
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * SingleLineAddressIntl Class Doc Comment
+ * CampaignsList Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -43,7 +43,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSerializable
+class CampaignsList implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'single_line_address_intl';
+    protected static $openAPIModelName = 'campaigns_list';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,8 +60,12 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'address' => 'string',
-        'country' => '\OpenAPI\Client\Model\CountryExtended'
+        'data' => '\OpenAPI\Client\Model\Campaign[]',
+        'object' => 'string',
+        'next_url' => 'string',
+        'previous_url' => 'string',
+        'count' => 'int',
+        'total_count' => 'int'
     ];
 
     /**
@@ -72,8 +76,12 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'address' => null,
-        'country' => null
+        'data' => null,
+        'object' => null,
+        'next_url' => null,
+        'previous_url' => null,
+        'count' => null,
+        'total_count' => null
     ];
 
     /**
@@ -103,8 +111,12 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'address' => 'address',
-        'country' => 'country'
+        'data' => 'data',
+        'object' => 'object',
+        'next_url' => 'next_url',
+        'previous_url' => 'previous_url',
+        'count' => 'count',
+        'total_count' => 'total_count'
     ];
 
     /**
@@ -113,8 +125,12 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'address' => 'setAddress',
-        'country' => 'setCountry'
+        'data' => 'setData',
+        'object' => 'setObject',
+        'next_url' => 'setNextUrl',
+        'previous_url' => 'setPreviousUrl',
+        'count' => 'setCount',
+        'total_count' => 'setTotalCount'
     ];
 
     /**
@@ -123,8 +139,14 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'address' => 'getAddress',
-        'country' => 'getCountry'
+        'data' => 'getData',
+        'object' => 'getObject',
+        'next_token' => 'getNextPageToken',
+        'next_url' => 'getNextUrl',
+        'previous_token' => 'getPreviousPageToken',
+        'previous_url' => 'getPreviousUrl',
+        'count' => 'getCount',
+        'total_count' => 'getTotalCount'
     ];
 
     /**
@@ -184,8 +206,12 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(array $data = null)
     {
-        $this->container['address'] = $data['address'] ?? null;
-        $this->container['country'] = $data['country'] ?? null;
+        $this->container['data'] = $data['data'] ?? null;
+        $this->container['object'] = $data['object'] ?? null;
+        $this->container['next_url'] = $data['next_url'] ?? null;
+        $this->container['previous_url'] = $data['previous_url'] ?? null;
+        $this->container['count'] = $data['count'] ?? null;
+        $this->container['total_count'] = $data['total_count'] ?? null;
     }
 
     /**
@@ -196,10 +222,6 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!is_null($this->container['address']) && (mb_strlen($this->container['address']) > 500)) {
-            $invalidProperties[] = "invalid value for 'address', the character length must be smaller than or equal to 500.";
-        }
 
         return $invalidProperties;
     }
@@ -215,55 +237,182 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
 
     /**
-     * Gets address
+     * Gets data
      *
-     * @return string|null
+     * @return \OpenAPI\Client\Model\Campaign[]|null
      */
-    public function getAddress()
+    public function getData()
     {
-        return $this->container['address'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets address
+     * Sets data
      *
-     * @param string|null $address The entire address in one string (e.g., \"370 Water St C1N 1C4\").
+     * @param \OpenAPI\Client\Model\Campaign[]|null $data list of campaigns
      *
      * @return self
      */
-    public function setAddress($address)
+    public function setData($data)
     {
-        if (!is_null($address) && (mb_strlen($address) > 500)) {
-            throw new \InvalidArgumentException('invalid length for $address when calling SingleLineAddressIntl., must be smaller than or equal to 500.');
+        $this->container['data'] = [];
+        if ($data) {
+            foreach ($data as $point) {
+                $deserializedData = ObjectSerializer::deserialize($point, '\OpenAPI\Client\Model\Campaign', []);
+                
+                array_push($this->container['data'], $deserializedData);
+            }
         }
 
-        $this->container['address'] = $address;
+        return $this;
+    }
+
+
+    /**
+     * Gets object
+     *
+     * @return string|null
+     */
+    public function getObject()
+    {
+        return $this->container['object'];
+    }
+
+    /**
+     * Sets object
+     *
+     * @param string|null $object Value is type of resource.
+     *
+     * @return self
+     */
+    public function setObject($object)
+    {
+        $this->container['object'] = $object;
 
         return $this;
     }
 
     /**
-     * Gets country
+     * get token from next URL field
      *
-     * @return \OpenAPI\Client\Model\CountryExtended|null
      */
-    public function getCountry()
-    {
-        return $this->container['country'];
+    public function getNextPageToken() {
+        if (is_null($this->container['next_url'])) {
+            return null;
+        } else {
+            return substr($this->container['next_url'], strrpos($this->container['next_url'], "after=") + 6);
+        }
     }
 
     /**
-     * Sets country
+     * Gets next_url
      *
-     * @param \OpenAPI\Client\Model\CountryExtended|null $country country
+     * @return string|null
+     */
+    public function getNextUrl()
+    {
+        return $this->container['next_url'];
+    }
+
+    /**
+     * Sets next_url
+     *
+     * @param string|null $next_url url of next page of items in list.
      *
      * @return self
      */
-    public function setCountry($country)
+    public function setNextUrl($next_url)
     {
-        $this->container['country'] = $country;
+        $this->container['next_url'] = $next_url;
+
+        return $this;
+    }
+
+    /**
+     * get token from previous URL field
+     *
+     */
+    public function getPreviousPageToken() {
+        if (is_null($this->container['previous_url'])) {
+            return null;
+        } else {
+            return substr($this->container['previous_url'], strrpos($this->container['previous_url'], "before=") + 7);
+        }
+    }
+
+    /**
+     * Gets previous_url
+     *
+     * @return string|null
+     */
+    public function getPreviousUrl()
+    {
+        return $this->container['previous_url'];
+    }
+
+    /**
+     * Sets previous_url
+     *
+     * @param string|null $previous_url url of previous page of items in list.
+     *
+     * @return self
+     */
+    public function setPreviousUrl($previous_url)
+    {
+        $this->container['previous_url'] = $previous_url;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets count
+     *
+     * @return int|null
+     */
+    public function getCount()
+    {
+        return $this->container['count'];
+    }
+
+    /**
+     * Sets count
+     *
+     * @param int|null $count number of resources in a set
+     *
+     * @return self
+     */
+    public function setCount($count)
+    {
+        $this->container['count'] = $count;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets total_count
+     *
+     * @return int|null
+     */
+    public function getTotalCount()
+    {
+        return $this->container['total_count'];
+    }
+
+    /**
+     * Sets total_count
+     *
+     * @param int|null $total_count indicates the total number of records. Provided when the request specifies an \"include\" query parameter
+     *
+     * @return self
+     */
+    public function setTotalCount($total_count)
+    {
+        $this->container['total_count'] = $total_count;
 
         return $this;
     }
@@ -274,6 +423,7 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -286,6 +436,7 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return mixed|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -299,6 +450,7 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -312,9 +464,8 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
      * Unsets offset.
      *
      * @param integer $offset Offset
-     *
-     * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
@@ -327,6 +478,7 @@ class SingleLineAddressIntl implements ModelInterface, ArrayAccess, \JsonSeriali
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);

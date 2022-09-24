@@ -1,6 +1,6 @@
 <?php
 /**
- * SendDate
+ * SortByDateModified
  *
  * PHP version 7.3
  *
@@ -33,10 +33,9 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * SendDate Class Doc Comment
+ * SortByDateModified Class Doc Comment
  *
  * @category Class
- * @description A timestamp in ISO 8601 format which specifies a date after the current time and up to 180 days in the future to send the letter off for production. Setting a send date overrides the default [cancellation window](#section/Cancellation-Windows) applied to the mailpiece. Until the &#x60;send_date&#x60; has passed, the mailpiece can be canceled. If a date in the format &#x60;2017-11-01&#x60; is passed, it will evaluate to midnight UTC of that date (&#x60;2017-11-01T00:00:00.000Z&#x60;). If a datetime is passed, that exact time will be used. A &#x60;send_date&#x60; passed with no time zone will default to UTC, while a &#x60;send_date&#x60; passed with a time zone will be converted to UTC.
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -44,7 +43,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class SendDate implements ModelInterface, ArrayAccess, \JsonSerializable
+class SortByDateModified implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -53,7 +52,7 @@ class SendDate implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'send_date';
+    protected static $openAPIModelName = 'sort_by_date_modified';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -61,7 +60,8 @@ class SendDate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        
+        'date_created' => 'string',
+        'date_modified' => 'string'
     ];
 
     /**
@@ -72,7 +72,8 @@ class SendDate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        
+        'date_created' => null,
+        'date_modified' => null
     ];
 
     /**
@@ -102,7 +103,8 @@ class SendDate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        
+        'date_created' => 'date_created',
+        'date_modified' => 'date_modified'
     ];
 
     /**
@@ -111,7 +113,8 @@ class SendDate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        
+        'date_created' => 'setDateCreated',
+        'date_modified' => 'setDateModified'
     ];
 
     /**
@@ -120,7 +123,8 @@ class SendDate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        
+        'date_created' => 'getDateCreated',
+        'date_modified' => 'getDateModified'
     ];
 
     /**
@@ -164,6 +168,36 @@ class SendDate implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    const DATE_CREATED_ASC = 'asc';
+    const DATE_CREATED_DESC = 'desc';
+    const DATE_MODIFIED_ASC = 'asc';
+    const DATE_MODIFIED_DESC = 'desc';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getDateCreatedAllowableValues()
+    {
+        return [
+            self::DATE_CREATED_ASC,
+            self::DATE_CREATED_DESC,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getDateModifiedAllowableValues()
+    {
+        return [
+            self::DATE_MODIFIED_ASC,
+            self::DATE_MODIFIED_DESC,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -180,6 +214,8 @@ class SendDate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
+        $this->container['date_created'] = $data['date_created'] ?? null;
+        $this->container['date_modified'] = $data['date_modified'] ?? null;
     }
 
     /**
@@ -190,6 +226,28 @@ class SendDate implements ModelInterface, ArrayAccess, \JsonSerializable
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getDateCreatedAllowableValues();
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if (!is_null($this->container['date_created']) && !in_array($this->container['date_created'], $allowedValues, true)) {
+                $invalidProperties[] = sprintf(
+                    "invalid value '%s' for 'date_created', must be one of '%s'",
+                    $this->container['date_created'],
+                    implode("', '", $allowedValues)
+                );
+            }
+        }
+
+        $allowedValues = $this->getDateModifiedAllowableValues();
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if (!is_null($this->container['date_modified']) && !in_array($this->container['date_modified'], $allowedValues, true)) {
+                $invalidProperties[] = sprintf(
+                    "invalid value '%s' for 'date_modified', must be one of '%s'",
+                    $this->container['date_modified'],
+                    implode("', '", $allowedValues)
+                );
+            }
+        }
 
         return $invalidProperties;
     }
@@ -205,7 +263,83 @@ class SendDate implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-        /**
+    
+
+    /**
+     * Gets date_created
+     *
+     * @return string|null
+     */
+    public function getDateCreated()
+    {
+        return $this->container['date_created'];
+    }
+
+    /**
+     * Sets date_created
+     *
+     * @param string|null $date_created date_created
+     *
+     * @return self
+     */
+    public function setDateCreated($date_created)
+    {
+        $allowedValues = $this->getDateCreatedAllowableValues();
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if (!is_null($date_created) && !in_array($date_created, $allowedValues, true)) {
+                throw new \InvalidArgumentException(
+                    sprintf(
+                        "Invalid value '%s' for 'date_created', must be one of '%s'",
+                        $date_created,
+                        implode("', '", $allowedValues)
+                    )
+                );
+            }
+        }
+
+        $this->container['date_created'] = $date_created;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets date_modified
+     *
+     * @return string|null
+     */
+    public function getDateModified()
+    {
+        return $this->container['date_modified'];
+    }
+
+    /**
+     * Sets date_modified
+     *
+     * @param string|null $date_modified date_modified
+     *
+     * @return self
+     */
+    public function setDateModified($date_modified)
+    {
+        $allowedValues = $this->getDateModifiedAllowableValues();
+        if (!method_exists($this, 'getId') || (!empty($this->getId()) && strpos($this->getId(), "fakeId") === False)) {
+            if (!is_null($date_modified) && !in_array($date_modified, $allowedValues, true)) {
+                throw new \InvalidArgumentException(
+                    sprintf(
+                        "Invalid value '%s' for 'date_modified', must be one of '%s'",
+                        $date_modified,
+                        implode("', '", $allowedValues)
+                    )
+                );
+            }
+        }
+
+        $this->container['date_modified'] = $date_modified;
+
+        return $this;
+    }
+    /**
      * Returns true if offset exists. False otherwise.
      *
      * @param integer $offset Offset

@@ -1,6 +1,6 @@
 <?php
 /**
- * BankAccountTypes
+ * CmpUseType
  *
  * PHP version 7.3
  *
@@ -31,37 +31,25 @@ namespace OpenAPI\Client\Model;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * BankAccountTypes Class Doc Comment
+ * CmpUseType Class Doc Comment
  *
  * @category Class
- * @description Unique identifier referring to status of bank account
+ * @description The usage type of this campaign. Can be one of &#x60;marketing&#x60; or &#x60;operational&#x60;.
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class BankAccountTypes
+enum CmpUseType: string
 {
     /**
      * Possible values of this enum
      */
-    const NUMBER_CREATED = 'bank_account.created';
+    case MARKETING = 'marketing';
 
-    const NUMBER_DELETED = 'bank_account.deleted';
+    case OPERATIONAL = 'operational';
 
-    const NUMBER_VERIFIED = 'bank_account.verified';
+    case NULL = 'null';
 
-    /**
-     * Gets allowable values of the enum
-     * @return string[]
-     */
-    public static function getAllowableEnumValues()
-    {
-        return [
-            self::NUMBER_CREATED,
-            self::NUMBER_DELETED,
-            self::NUMBER_VERIFIED
-        ];
-    }
 }
 
 

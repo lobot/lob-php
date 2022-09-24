@@ -1,6 +1,6 @@
 <?php
 /**
- * AddressTypes
+ * CmpScheduleType
  *
  * PHP version 7.3
  *
@@ -31,34 +31,21 @@ namespace OpenAPI\Client\Model;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * AddressTypes Class Doc Comment
+ * CmpScheduleType Class Doc Comment
  *
  * @category Class
- * @description Unique identifier referring to status of address
+ * @description How the campaign should be scheduled. Only value available today is &#x60;immediate&#x60;.
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class AddressTypes
+enum CmpScheduleType: string
 {
     /**
      * Possible values of this enum
      */
-    const NUMBER_CREATED = 'address.created';
+    case IMMEDIATE = 'immediate';
 
-    const NUMBER_DELETED = 'address.deleted';
-
-    /**
-     * Gets allowable values of the enum
-     * @return string[]
-     */
-    public static function getAllowableEnumValues()
-    {
-        return [
-            self::NUMBER_CREATED,
-            self::NUMBER_DELETED
-        ];
-    }
 }
 
 

@@ -70,7 +70,7 @@ class LetterEditable implements ModelInterface, ArrayAccess, \JsonSerializable
         'address_placement' => 'string',
         'return_envelope' => 'mixed',
         'perforated_page' => 'int',
-        'custom_envelope' => '\OpenAPI\Client\Model\LetterEditableCustomEnvelope',
+        'custom_envelope' => 'string',
         'to' => 'string',
         'from' => 'string',
         'file' => 'string',
@@ -683,7 +683,7 @@ class LetterEditable implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets custom_envelope
      *
-     * @return \OpenAPI\Client\Model\LetterEditableCustomEnvelope|null
+     * @return string|null
      */
     public function getCustomEnvelope()
     {
@@ -693,7 +693,7 @@ class LetterEditable implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets custom_envelope
      *
-     * @param \OpenAPI\Client\Model\LetterEditableCustomEnvelope|null $custom_envelope custom_envelope
+     * @param string|null $custom_envelope custom_envelope
      *
      * @return self
      */
